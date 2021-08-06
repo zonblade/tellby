@@ -1,3 +1,5 @@
+# Django Social Media Project
+just a social media project.
 # tellby
 yow, live webnya disini : https://tell.by
 # guna?
