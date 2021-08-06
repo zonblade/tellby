@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    {% include 'head/head.html' %}
+    <body class="bg-deep">
+        <nav class="sticky-top" style="border-bottom:1px solid #6C757D;">
+            <div class="navbar navbar-light navbar-expand-lg">
+                {% include 'navs/navbar.html' %}
+            </div>
+        </nav>
+        <loader class="content-centers" style="display:none;width:100%;position:fixed;top:30%">
+            <p style="text-align:center">
+                <img src="{{ cdn }}/img/avatar/39.svg">
+            </p>
+        </loader>
+        <div id="maincon" class="mx-auto" style="max-width:1000px !important;">
+            {% block content_body %}
+            replace me
+            {% endblock %}
+            {% block script %}
+            {% endblock %}
+        </div>
+        <rightcon>
+            {% include 'body/rightcon.html' %}
+        </rightcon>
+        <div id="edit-modal">
+        </div>
+    </body>
+</html>

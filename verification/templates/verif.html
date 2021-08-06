@@ -1,0 +1,46 @@
+{% extends 'root.html' %}
+
+{% block content_body %}
+<style>
+    .content-centerss {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% if user.is_authenticated %}
+<main class="content-centerss" style="height:calc(100vh - 60px)">
+    <div>
+        <h2 class="animate__animated animate__fadeIn animate__delay-1s bg-deep" style="border-radius:10px;padding:10px;text-align:center;">
+            <span>
+                <b>Email has been confirmed!</b>
+            </span>
+        </h2>
+    </div>
+</main>
+<script>
+    $.ajax({
+        url: '/msc/',
+        type: "POST",
+        dataType: "html",
+        data: {
+            'ajax.render':'email.place.render',
+            'csrfmiddlewaretoken': CSRFTOKENNAV,
+        },
+        success: function(result){
+            $('#emailContainer').html(result);
+        }
+    });
+</script>
+{% else %}
+<main class="content-centerss" style="height:calc(100vh - 60px)">
+    <div>
+        <h2 class="animate__animated animate__fadeIn animate__delay-1s bg-deep" style="border-radius:10px;padding:10px;text-align:center;">
+            <span>
+                <b>Email has been confirmed!</b>
+            </span>
+        </h2>
+    </div>
+</main>
+{% endif %}
+{% endblock %}

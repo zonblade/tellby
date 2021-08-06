@@ -1,0 +1,79 @@
+{% for user_post in user_story %}
+<div class="col-md-4 load-item">
+    <postcard class         ="card"
+              onclick       ="getPages(this)"
+              render        ="story.view.render"
+              render-name   ="{{ user_post.post_title }}"
+              render-url    ="/p/{{ user_post.mock_url }}/">
+        <div class="header">
+            <h5>
+                <b>{{ user_post.post_title|striptags|title|truncatechars:30 }}</b>
+                <br>
+                <small>
+                    {{ user_post.post_date }}
+                </small>
+            </h5>
+        </div>
+        <div class="content">
+            <content style="opacity:0.6">
+                {% autoescape on %}
+                {{ user_post.content|striptags|safe|linebreaksbr|truncatechars:300  }}
+                {% endautoescape %}
+            </content>
+        </div>
+        <div class="footer">
+            <span class="float-left" style="margin-right:10px;">
+                <i class="fas fa-eye"></i>
+                {{ user_post.post_seen }}
+            </span>
+            <span class="float-left" style="margin-right:10px;">
+                <i class="far fa-comment"></i>
+                {{ user_post.commentCount }}
+            </span>
+        </div>
+    </postcard>
+</div>
+{% endfor %}
+<div id="load-unload">
+    {% if user_story.has_next %}
+    <center>
+        <button id      ="load-more-btn"
+                class   ="btn btn-lg btn-outline-light shadow-none" 
+                style   ="margin:20px;"
+                load    ="profile.more.render"
+                load-more-data = "{{ user_story.next_page_number }}"
+                onclick="loadMore(this)">
+            Load More
+        </button>
+    </center>
+    {% else %}
+    <center>
+        <button id      ="load-more-btn"
+                class   ="btn btn-lg btn-outline-light shadow-none" 
+                style   ="margin:20px;display:none;">
+            Load More
+        </button>
+    </center>
+    {% endif %}
+
+    <script>
+        var loadmore=$("#load-more-btn");
+        $(window).scroll(function() {
+            var top_of_element = loadmore.offset().top;
+            var bottom_of_element = loadmore.offset().top + loadmore.outerHeight();
+            var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+            var top_of_screen = $(window).scrollTop();
+            if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
+                if (typeof code_happenedprofile{{ user_story.number }} === 'undefined') {
+                    window.code_happenedprofile{{ user_story.number }} = true;
+                    loadmore.click();
+                } else {
+                    // the element is not visible, do something else
+                    setTimeout(function(){
+                        delete window.code_happenedprofile{{ user_story.number }};
+                    },10000);
+                }
+            }
+        });
+    </script>
+</div>

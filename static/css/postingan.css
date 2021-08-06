@@ -1,0 +1,225 @@
+.o .xavsc {
+    display:none;
+}
+.o .card-w  .card-heading {
+    color: #333;
+    background-color: #fff;
+    border-color: #ddd;
+    border: 1px solid #dddddd;
+}
+.o .card-w  .card-footer {
+    background-color: #fff;
+    border-color: #ddd;
+}
+.o .card-w .h5 {
+    font-size:14px;
+    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.o .card-w .time {
+    font-size:12px;
+    //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.o .post .post-heading {
+    height: 95px;
+    padding: 20px 15px;
+}
+.o .post .post-heading .avatar {
+    width: 60px;
+    height: 60px;
+    display: block;
+    margin-right: 15px;
+}
+.o .post .post-heading .meta .title {
+    margin-bottom: 0;
+}
+.o .post .post-heading .meta .title a {
+    color: black;
+}
+.o .post .post-heading .meta .title a:hover {
+    color: #aaaaaa;
+}
+.o .post .post-heading .meta .time {
+    margin-top: 8px;
+    color: #999;
+}
+.o .post .post-image .image {
+    width: 100%;
+    height: auto;
+}
+.o .post .post-description {
+    padding: 15px;
+}
+.o .post .post-description p {
+    font-size: 16px;
+}
+.o .post .post-description .stats {
+    margin-top: 20px;
+}
+.o .post .post-description .stats .stat-item {
+    display: inline-block;
+    margin-right: 15px;
+}
+.o .post .post-description .stats .stat-item .icon {
+    margin-right: 8px;
+}
+.o .post .post-footer {
+    border-top: 1px solid #ddd;
+    padding: 15px;
+}
+.o .post .post-footer .input-group-addon a {
+    color: #454545;
+}
+.o .post .post-footer .comments-list {
+    padding: 0;
+    margin-top: 20px;
+    list-style-type: none;
+}
+.o .post .post-footer .comments-list .comment {
+    display: block;
+    width: 100%;
+    margin: 20px 0;
+}
+.o .post .post-footer .comments-list .comment .avatar {
+    width: 35px;
+    height: 35px;
+}
+.o .post .post-footer .comments-list .comment .comment-heading {
+    display: block;
+    width: 100%;
+}
+.o .post .post-footer .comments-list .comment .comment-heading .user {
+    font-size: 14px;
+    font-weight: bold;
+    display: inline;
+    margin-top: 0;
+    margin-right: 10px;
+}
+.o .post .post-footer .comments-list .comment .comment-heading .time {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 0;
+    display: inline;
+}
+.o .post .post-footer .comments-list .comment .comment-body {
+    margin-left: 50px;
+}
+.o .post .post-footer .comments-list .comment > .comments-list {
+    margin-left: 50px;
+}
+
+.comment {
+    overflow: hidden;
+    padding: 0 0 1em;
+    border-bottom: 1px solid #ddd;
+    margin: 0 0 1em;
+    *zoom: 1;
+}
+
+.comment-img {
+    float: left;
+    margin-right: 33px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.comment-img img {
+    display: block;
+}
+
+.comment-body {
+    overflow: hidden;
+}
+
+.comment .text {
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.comment .text p:last-child {
+    margin: 0;
+}
+
+.comment .attribution {
+    margin: 0.5em 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Decoration */
+
+.comments,
+.comment {
+    position: relative;
+}
+
+.comments:before,
+.comment:before,
+.comment .text:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 65px;
+}
+
+.comments:before {
+    width: 3px;
+    top: -20px;
+    bottom: -20px;
+    background: rgba(0,0,0,0.1);
+}
+
+.comment:before {
+    width: 9px;
+    height: 9px;
+    border: 3px solid #fff;
+    border-radius: 100px;
+    margin: 16px 0 0 -6px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+    background: #ccc;
+}
+
+.comment:hover:before {
+    background: orange;
+}
+
+.comment .text:before {
+    top: 18px;
+    left: 78px;
+    width: 9px;
+    height: 9px;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+    background: #fff;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+}
+.o .form-control-underlined {
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-radius: 0;
+    padding-left: 0;
+}
+/* width */
+.theComment::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+.theComment::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0);
+}
+
+/* Handle */
+.theComment::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.theComment::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

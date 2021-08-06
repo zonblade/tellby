@@ -1,0 +1,58 @@
+{% extends 'profile.html' %}
+
+{% block content_profile %}
+<div class="col-md-8">
+    <div class="alert alert-info" role="alert" style="margin-top:10px;">
+        {{ user_data.username }} Link Bank
+    </div>
+
+    <style>
+        .linkee .card2 {
+            box-shadow: none;
+            transition: 0.3s;
+            border: none;
+            /*background: rgb(255,255,255) !important;
+            background: linear-gradient(0deg, rgba(255,255,255,1) 35%, rgba(247,254,255,1) 53%, rgba(247,254,255,0) 85%) !important;*/
+            background: rgb(255,255,255);
+            background: -moz-linear-gradient(270deg, rgba(255,255,255,1) 35%, rgba(247,254,255,1) 53%, rgba(247,254,255,0) 85%);
+            background: -webkit-linear-gradient(270deg, rgba(255,255,255,1) 35%, rgba(247,254,255,1) 53%, rgba(247,254,255,0) 85%);
+            background: linear-gradient(270deg, rgba(255,255,255,1) 35%, rgba(247,254,255,1) 53%, rgba(247,254,255,0) 85%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#f7feff",GradientType=1);
+        }
+        .linkee .card2:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+        }
+        .linkee .card2 a {
+            color: initial;
+        }
+        .linkee .card2 a:hover {
+            text-decoration: initial;
+        }
+        .linkee .card2 .text-muted i {
+            margin: 0 10px;
+        }
+    </style>
+    <div class="">
+        <div class=" linkee">
+            {% for link_prev in linktree %}
+                <div class="card card2" style="max-height:80px;margin-bottom:10px;">
+                    <a href="{% if '://' in link_prev.link %}{{ link_prev.link }}{% else %}http://{{ link_prev.link }}{% endif %}">
+                        <div class="row no-gutters">
+                            <div class="col-4">
+                                <center>
+                                    <img style="max-width:200px;max-height:80px;border-radius:5px;" src="{{ link_prev.img }}">
+                                </center>
+                            </div>
+                            <div class="col">
+                                <div class="card-body">
+                                    <h6 class="card-title"><b>{{ link_prev.title|truncatechars:30 }}</b><br><small>{{ link_prev.desc|truncatechars:50 }}</small></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <title>TellBy</title>
+        <link rel="icon" href="https://cdn.tell.by/img/eucalyptus.svg">
+        <meta name="viewport" content="width=device-width,  height=device-height, initial-scale = 1,user-scalable=no">
+        <link rel="stylesheet" href="https://cdn.tell.by/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.tell.by/css/node_modules/animate.css/animate.css" />
+        <script src="https://cdn.tell.by/js/jquery.js"></script>
+        <script src="https://cdn.tell.by/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://cdn.tell.by/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat&family=Indie+Flower&family=Montserrat+Alternates&display=swap" rel="stylesheet">
+        <link   rel="stylesheet" href="https://cdn.tell.by/css.cgi@name=main.css"/>
+        <script src="https://cdn.tell.by/js.cgi@name=controller-navbar.js"></script>
+    </head>
+    <body class="bg-deep">
+        <nav class="bg-deep sticky-top">
+            <div class="navbar navbar-dark navbar-expand-lg mx-auto">
+                {% include 'navs/navbar.html' %}
+            </div>
+        </nav>
+
+        <loader class="content-centers" style="display:none;width:100%;position:fixed;top:30%">
+            <p style="text-align:center">
+                <img src="https://cdn.tell.by/img/avatar/39.svg">
+            </p>
+        </loader>
+        {% if user.is_authenticated %}
+        <main id="maincon">
+            <div class="container animate__animated animate__fadeIn animate__delay-1s" style="margin-top:40px;">
+                <div class="row">
+                    <div class="col">
+                        <center>
+                            <h2 style="test-align:center">
+                                Welcome {{ user.username }}
+                            </h2>
+                        </center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="padding:20px;">
+                        <div style="margin-top:20px">
+                            <div class="row">
+                                <!-- DEMO 5 Item-->
+                                <div class="col-lg">
+                                    <a href="/">
+                                        <div class="hover hover-5 text-white rounded"><img src="https://cdn.tell.by/img/road.jpg" alt="">
+                                            <div class="hover-overlay"></div>
+                                            <div class="hover-5-content">
+                                                <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore a Story<br><br></h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="padding:20px;">
+                        <div style="margin-top:20px">
+                            <div class="row">
+                                <!-- DEMO 5 Item-->
+                                <div class="col-lg">
+                                    <a href="/{{ user.username }}">
+                                        <div class="hover hover-5 text-white rounded"><img src="https://cdn.tell.by/img/road.jpg" alt="">
+                                            <div class="hover-overlay"></div>
+                                            <div class="hover-5-content">
+                                                <h3 class="hover-5-title text-uppercase font-weight-light mb-0">View your Profile<br><br>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% else %}
+        <main id="maincon" style="margin-top:40px;">
+            <div class="container"
+                 style="display: grid;
+                        place-items:center;
+                        height:80vh">
+                <div class="card bg-deep rounded" style="padding:5px;width:100%;min-width:300px;max-width:600px">
+                    <div class="card-body">
+                        <h4>
+                            TellBy <b>Login</b>
+                        </h4>
+                        <hr>
+                        <form class="mx-auto" style="max-width:600px" method="POST" action=".">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <hr>
+                            <input class="btn btn-sleek-dark d-inline-block" type="submit" onclick="this.form.submit();preloaderShowMain();" value="Login">
+                            <input class="btn btn-sleek-primary shadow-none d-inline-block" type="button" onClick="preloaderShowMain();window.open('/auth/daftar/','_SELF')" value="Register">
+                        </form>
+                        <script type="text/javascript">
+                            $('.form-control').addClass("shadow-none");
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </main>
+        {% endif %}
+    </body>
+</html>

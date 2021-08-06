@@ -1,0 +1,131 @@
+
+<postingan>
+    <view>
+        <container>
+            <header>
+                <div class="header-menu">
+                    <center>
+                        {% if user.is_authenticated %}
+                        {% if user.username == user_post.username %}
+                        <a class="header-menu-item"
+                           render="story.delete"
+                           render-name="Deleting..."
+                           render-url="/p/{{ content_post.mock_url }}/delete/"
+                           onclick="var result = confirm('Want to delete?'); if (result) { deleteStory(this); }"
+                           ><content><i class="fas fa-trash"></i></content></a><!--
+                     --><a class="header-menu-item"
+                           onclick ="editStory(this)"
+                           render="story.edit.nochange"
+                           render-sub="#story-content"
+                           render-url="/p/{{ content_post.mock_url }}/edit/"
+                           ><content><i class="fas fa-pen"></i></content>
+                        </a>{% endif %}<!--
+                     --><a class="header-menu-item mati" style="cursor: not-allowed;" title="Coming Soon"><content><i class="far fa-heart"></i></content></a><!--
+                     --><a class="header-menu-item"
+                           style="cursor: pointer;"
+                           onclick="$('#komen').toggle('slide', {direction:'up'});"
+                           title="Coming Soon"><content><i class="far fa-comment-alt"></i></content>
+                        </a>{% endif %}<!--
+                     --><a class         ="header-menu-item"
+                           onclick       ="getPages(this)"
+                           render        ="profile.render"
+                           render-name   ="Profile"
+                           render-url    ="/{{ user_post.username }}/"
+                           ><content><i class="fas fa-user-edit"></i></content></a>
+                    </center>
+                </div>
+            </header>
+            <contentpost class="container-fluid" style="padding-right:0px!important;padding-left:0px!important;">
+                <div class="row no-gutters">
+                    <div class="col-md ">
+                        <div class="postingan-info bg-deep" style="position:sticky;top:87px;">
+                            <div class="header">
+                                <img src="{{ cdn }}/img.cgi@avatar={{ content_post.user.username }}"/>
+                                <h5>
+                                    {{ content_post.user.username }} {%  if not active %}<i class="fas fa-exclamation-circle text-danger" style="font-size:1rem;cursor:pointer;" title="Email not Confirmed!"></i>{% endif %}<br>
+                                    <small>Posted on:<br>{{ content_post.post_date }}</small>
+                                </h5>
+                            </div>
+                            <div class="container" style="padding-top:10px;border-bottom: 1px solid #343A40; ">
+                                <p>
+                                    <small>
+                                        keyword: 
+                                        {{ content_post.post_keyword|striptags|safe }}
+                                    </small>
+                                </p>
+                            </div>
+                            <!-- KOMENTAR KOMING SOON! -->
+                            <div id="komen" style="display:none;">
+                                <div style="display:grid;position:relative;height:400px;grid-template-rows: auto 1fr auto;">
+                                    <div id="komen-header">
+                                        <h5 class="d-inline-block" style="padding:5px;">Comment</h5>
+                                    </div>
+                                    <div id="komen-items" class="bg-info" style="overflow-y:show;overflow-x:hidden;">
+                                        <div style="padding:5px;max-width:300px;" class="d-flex flex-row-reverse">
+                                            <p style="text-align:right">
+                                                <b> tellby</b><br>
+                                                belum bisa komentar euy, tapi ya nanti nongol disini kok wkwk, kalo gak ya disamping...
+                                            </p>
+                                        </div>
+                                        <div style="padding:5px;max-width:300px;" class="d-flex flex-row">
+                                            <p style="text-align:left">
+                                                <b>retasorg</b><br>
+                                                lah ada komen?
+                                            </p>
+                                        </div>
+                                        <div style="padding:5px;max-width:300px;" class="d-flex flex-row">
+                                            <p style="text-align:left">
+                                                <b>zonblade</b><br>
+                                                eh ada komen?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-deep" style="padding-top:5px;padding-bottom:15px;">
+                                        <div>
+                                            <input type="hidden" name="csrfmiddlewaretoken" value="NmB42ivwBBRTIzLYSQhUE5wlzJH3oNANDwP37c9BKTtqgyVj30txtZINq4Izegnb">
+                                            <p>
+                                                <small for="id_message">Komentar:</small> 
+                                                <input type="text" name="message" class="form-control shadow-none" required="" id="id_message">
+                                            </p>
+                                            <input type="button" class="btn btn-sm btn-sleek-primary shadow-none" value="kirim komentar" onclick="comingSoon()">
+                                            <button type="button" class="btn btn-sm btn-sleek-orange shadow-none" onclick="comingSoon()">refresh komen</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END  KOMING SOON! -->
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="detailpost bg-deep">
+                            <div id="story-content" class="container" style="padding-top:15px;padding-bottom:15px;">
+                                <link   rel="stylesheet" href="{{ cdn }}/css/prism.css"/>
+                                <script>
+                                    $(document).contents().find("link[href*=\'content.inline.min.css\']").remove();
+                                    tinymce.remove();
+                                </script>
+                                <h3 style="font-weight:800;letter-spacing: 0.1rem;text-align:center;margin-bottom:15px;">
+                                    {{ content_post.post_title|striptags|safe }}
+                                </h3>
+                                <hr>
+                                <div id="">
+                                    {% autoescape on %}
+                                    {{ content_sanitize|safe }}
+                                    {% endautoescape %}
+                                </div>
+                                <script                  src="{{ cdn }}/js/prism.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </contentpost>
+        </container>
+    </view>
+    <!--
+    <comment>
+        <content>
+            komentar
+        </content>
+    </comment>
+    -->
+</postingan>

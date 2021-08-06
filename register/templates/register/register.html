@@ -1,0 +1,51 @@
+{% extends 'root.html' %}
+
+{% block content_body %}
+{% load crispy_forms_tags %}
+<div class="container" style="display: grid;
+                              place-items:center;
+                              height:80vh">
+    <div class="card bg-deep rounded" style="padding:5px;width:100%;min-width:300px;max-width:600px">
+        <div class="card-body">
+            <h3>
+                Register to TellBy
+            </h3>
+            <hr>
+            {% if register_success %}
+            <div class="alert alert-success" role="alert">
+                Registration success! <a href="/auth/login/">Login Here...</a><br>
+                <b>Please check your Email for verification</b>
+            </div>
+            {% endif %}
+            <form class="mx-auto form-group" style="max-width:500px" method="POST" action=".">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input class="btn btn-sleek-orange shadow-none d-inline-block" type="submit" onclick="this.form.submit();preloaderShowMain();" value="Register">
+                <input class="btn btn-sleek-dark shadow-none d-inline-block" type="button" onClick="preloaderShowMain();window.open('/auth/login/','_SELF')" value="Login">
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.form-control').addClass("shadow-none");
+    $('#hint_id_username').html('Only Allowing alphabet Number and Underscore!')
+</script>
+{% if email_err == True %}
+<script>
+    $("#id_email").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>A user with that email already exists.</strong></p>').insertAfter('#id_email');
+</script>
+{% endif %}
+{% if length_err == True %}
+<script>
+    $("#id_username").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Username is too short, minimum 7 character.</strong></p>').insertAfter('#id_username');
+</script>
+{% endif %}
+{% if username_err == True  %}
+<script>
+    $("#id_username").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Username memiliki huruf terlarang!.</strong></p>').insertAfter('#id_username');
+</script>
+{% endif %}
+{% endblock %}

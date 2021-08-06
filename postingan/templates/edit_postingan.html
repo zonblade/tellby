@@ -1,0 +1,24 @@
+{% extends 'root.html' %}
+{% block content_body %}
+<form class="mx-auto" style="max-width:1100px" method="POST" action=".">
+    <main class="mx-auto" style="max-width:1100px;">
+        {% csrf_token %}
+        <textarea class="shadow-none form-control" type="text" name="content" style="visibility: hidden;width:100%;height:calc(100vh - 100px);margin:0px !important;">{{ konten.content }}</textarea><br>
+        <script src="https://cdn.tiny.cloud/1/l7ow4wimxht2ghovh6cskicygudoaakvs018qoong1p9uivn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="{{ cdn }}/js.cgi@name=tiny.js" type="text/javascript"></script>
+    </main>
+    <div class="fixed-bottom mx-auto" style="max-width:1100px;">
+        <div style="position:absolute;right:10px;bottom:20px;">
+            {% if empty_err %}
+            <span class="btn btn-light shadow-none" style="border:2px solid black" >
+                <i class="fas fa-exclamation-triangle text-warning"></i>
+            </span>
+            {% endif %}
+            <span class="btn btn-dark shadow-none" style="border:2px solid white" >
+                Edit
+            </span>
+            <input style="border:2px solid black" class="btn btn-light shadow-none" type="submit" value="save story" onClick="this.form.submit(); this.disabled=true;">
+        </div>
+    </div>
+</form>
+{% endblock %}

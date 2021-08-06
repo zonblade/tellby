@@ -1,0 +1,231 @@
+<script src="{{ cdn }}/js.cgi@name=controller-postingan.js"></script>
+<script src="{{ cdn }}/js.cgi@name=controller-home.js"></script>
+<main class="home mx-auto" style="max-width:1300px;margin-top:10px;margin-bottom:70px;">
+    {% include 'body/home_header.html' %}
+    <div class="container-fluid o" >
+        <div class="row" style="margin-bottom:60px;">
+            <div class="col-sm-3 d-md-none">
+                <!-- SIDE -->
+                <div style="margin-top:20px">
+                    <div class="row">
+                        <!-- DEMO 5 Item-->
+                        <div class="col-lg">
+                            <div class="hover hover-5 text-white rounded"><img src="{{ cdn }}/img/nature.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="hover-5-content">
+                                    <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore a Story<br><span></span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="row infinite-container" style="margin-bottom:20px;">
+                    {% for user_post in numbers %}
+                    <div class="col-md-6 infinite-item" style="margin-top:20px;">
+                        <div class="card posts card-w bg-light post mx-auto" style="margin:5px;max-width:600px;">
+                            <div class="post-heading">
+                                <div class="float-left image">
+                                    <img src="https://cdn.tell.by/img.cgi@avatar={{ user_post.user.username }}"  style="border-radius:50%;" class="img-circle avatar" alt="user profile image">
+                                </div>
+                                <div class="float-left meta">
+                                    <div class="title toolbar-icons h4">
+                                        <a style="cursor:pointer;" class="user_post_name" id="{{ user_post.user.username }}" onClick="user_post_name(this)"><b>{{ user_post.user.username|title }}</b></a>
+                                    </div>
+                                    <h6 class="text-muted time">
+                                        {{ user_post.post_date }}
+                                    </h6><br>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="post-description" style="overflow:hidden;height:150px;word-wrap: break-word;">
+                                <html>
+                                    <body>
+                                        <div  class="print_post">
+                                            {% autoescape on %}
+                                            {{ user_post.content|striptags|safe|linebreaksbr|truncatechars:300  }}
+                                            {% endautoescape %}
+                                        </div>
+                                    </body>
+                                </html>
+                            </div>
+                            <hr>
+                            <div style="padding:15px;">
+                                <ul class="list-inline d-sm-flex my-0">
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}">
+                                            <i class="fas fa-eye g-pos-rel g-top-1 g-mr-3"></i>
+                                            {{ user_post.post_seen }}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/#comment">
+                                            <i class="far fa-comment g-pos-rel g-top-1 g-mr-3"></i>
+                                            {{ user_post.commentCount }}
+                                        </a>
+                                    </li>
+                                    {% if user_post.user_id == user.id %}
+                                    |&ensp;
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/edit">
+                                            <i class="fas fa-pen g-pos-rel g-top-1 g-mr-3"></i>
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/delete">
+                                            <i class="fas fa-trash g-pos-rel g-top-1 g-mr-3"></i>
+                                            Del
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    <li class="list-inline-item ml-auto">
+                                        <a class="u-link-v5 btn btn-sm btn-outline-dark shadow-none user_post_story" id="{{ user_post.mock_url }}" onClick="getstory(this)">
+                                            <i class="fas fa-eye g-pos-rel g-top-1 g-mr-3"></i>
+                                            Read Story
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if numbers.has_next %}
+                <a class="infinite-more-link" style="opacity:0;" href="?p={{ numbers.next_page_number }}">More</a>
+                {% endif %}
+                <div class="infinite-loading" style="display:none;margin-top:0px;">
+                    <div class="content-centers" style="height:50px;!important;">
+                        <p style="text-align:center">
+                            <img src="{{ cdn }}/img/avatar/39.svg">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 d-none d-md-block">
+                <!-- SIDE -->
+                <div style="margin-top:20px">
+                    <div class="row">
+                        <!-- DEMO 5 Item-->
+                        <div class="col-lg">
+                            <div class="hover hover-5 text-white rounded"><img src="{{ cdn }}/img/nature.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="hover-5-content">
+                                    <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore a Story<br>
+                                        <span></span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;">
+                    <h4>
+                        Top Hashtag this Month
+                    </h4>
+                    {% for value, count in popular_hashtag %}
+                    <a href="/explore/{{ value }}/hashtag/">#{{ value }}</a>  
+                    {% endfor %}
+                </div>
+                <div style="position:sticky;top:70px;">
+                    <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;">
+                        <div style="margin-top:20px">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1" style="width:32px"><center>@</center></span>
+                                </div>
+                                <input id="inp_search_usr" type="text" placeholder="User Search..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search_usr"><i class="fas fa-search"></i></button>
+                                </div>
+                                <script>
+                                    $('#btn_search_usr').on('click',function(){
+                                        var Search = $('#inp_search_usr').val();
+                                        if( !($('#inp_search_usr').val()) ){
+                                            $('#inp_search_usr').addClass("is-invalid");
+                                        }else{
+                                            window.open('/explore/'+Search+'/user/','_SELF');
+                                        }
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1" style="width:32px"><center>#</center></span>
+                                </div>
+                                <input id="inp_search_hashtag" type="text" placeholder="Hashtag Search..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search_hashtag"><i class="fas fa-search"></i></button>
+                                </div>
+                                <script>
+                                    $('#btn_search_hashtag').on('click',function(){
+                                        var Search = $('#inp_search_hashtag').val();
+                                        if( !($('#inp_search_hashtag').val()) ){
+                                            $('#inp_search_hashtag').addClass("is-invalid");
+                                        }else{
+                                            window.open('/explore/'+Search+'/hashtag/','_SELF');
+                                        }
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                        <hr>
+                        <a onclick="create_story(this)" class=" btn btn-light btn-block shadow-none" style="border:2px solid black">
+                            <i class="fas fa-plus"></i> Create Story
+                        </a>
+                    </div>
+                    <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;">
+                        <h4>
+                            User you might want to see:
+                        </h4>
+
+                        <style>
+                            .imgs {
+                                cursor:pointer;
+                                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                                transition: 0.3s;
+                                border: none;
+                            }
+                            .imgs:hover {
+                                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+                            }
+                        </style>
+                        <div class="img_loader" style="height:100px;">
+                            <p style="text-align:center">
+                                <span class="spinner-border text-dark" role="status"></span>
+                            </p>
+                        </div>
+                        <div class="row no-gutters" id="users" style="display:none;">
+                            {% for Ur in UserRecom %}
+                            <div class="col-2 tooltp" style="padding:3px;" title="{{ Ur.username }}">
+                                <a href="#" class="user_post_name" id="{{ Ur.username }}" onClick="user_post_name(this)">
+                                    <img class="imgs" style="height:48px;width:48px;border-radius:50%" src="https://cdn.tell.by/img.cgi@avatar={{ Ur.username }}"/>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <script>
+                            new jBox('Tooltip', {
+                                theme: 'TooltipDark',
+                                attach: '.tooltp',
+                                delayOpen: 50,
+                                delayClose: 100
+                            });
+                        </script>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    $('html').waitForImages( function(){
+        $('.img_loader').hide();
+        setTimeout(function(){
+            $('#users').show().addClass('animate__animated animate__fadeIn');
+        },500);
+    })
+</script>

@@ -1,0 +1,91 @@
+<header>
+    <div class="bg-deep header-image">
+        <img src="https://cdn.tell.by/img.cgi@avatar={{ user_data.username }}" alt="profile-image" class="img-profile"/>
+    </div>
+    <div class="header-info">
+        <div style="padding:10px;height:100%;position:relative;" class="header-sub-info bg-deep">
+            <h1 style="margin-top:15px;font-weight: 900;letter-spacing:0.1rem;">
+                @{{ user_data.username }} {%  if not active_pub %}<i class="fas fa-exclamation-circle text-danger" style="font-size:1.5rem;cursor:pointer;" title="Email not Confirmed!"></i>{% endif %}
+                <br>
+
+                <small><i style="font-size:0.8rem;font-weight:400;">Joined: {{ user_data.date_joined }}</i></small>
+            </h1>
+            <p style="margin-top:15px;">
+                {{ user_data_more.bio|striptags|safe|linebreaksbr|truncatechars:150 }}
+            </p>
+            <p style="display:flex;flex-wrap:wrap;">
+                {% if user_data_more %}
+                {% if user_data_more.facebook != '#' %}
+                <button class="btn socialbutton btn-sm shadow-none"
+                        onclick="window.open('{{ user_data_more.facebook }}')">
+                    <icon>
+                        <i class="fab fa-facebook"></i>
+                    </icon>
+                    <span class="d-none d-md-block">Facebook</span>
+                </button>
+                {% endif %}
+                {% if user_data_more.facebook != '#' %}
+                <button class="btn socialbutton btn-sm shadow-none"
+                        onclick="window.open('{{ user_data_more.twitter }}')">
+                    <icon>
+                        <i class="fab fa-twitter"></i>
+                    </icon>
+                    <span class="d-none d-md-block">Twitter</span>
+                </button>
+                {% endif %}
+                {% if user_data_more.instagram != '#' %}
+                <button class="btn socialbutton btn-sm shadow-none"
+                        onclick="window.open('{{ user_data_more.instagram }}')">
+                    <icon>
+                        <i class="fab fa-instagram"></i>
+                    </icon>
+                    <span class="d-none d-md-block">Instagram</span>
+                </button>
+                {% endif %}
+                {% if user_data_more.github != '#' %}
+                <button class="btn socialbutton btn-sm shadow-none"
+                        onclick="window.open('{{ user_data_more.github }}')">
+                    <icon>
+                        <i class="fab fa-github"></i>
+                    </icon>
+                    <span class="d-none d-md-block">Github</span>
+                </button>
+                {% endif %}
+                {% if user_data_more.dribbble != '#' %}
+                <button class="btn socialbutton btn-sm shadow-none"
+                        onclick="window.open('{{ user_data_more.dribbble }}')">
+                    <icon>
+                        <i class="fab fa-dribbble"></i>
+                    </icon>
+                    <span class="d-none d-md-block">Dribbble</span>
+                </button>
+                {% endif %}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</header>
+<headermenu>
+    <center>
+        <!--
+--><a class="header-menu-item"
+      style="cursor: pointer;"
+      onclick="getSubPages(this)"
+      render="profile.sub.render"
+      render-name="Profile {{ user_data.username }}"
+      render-url="/{{ user_data.username }}/"
+      render-sub="#profile-sub"
+      title="Coming Soon"><content><i class="fas fa-book-open"></i></content></a><!--
+--><a class="header-menu-item mati"
+      style="cursor: not-allowed;"
+      title="Coming Soon"><content><i class="fas fa-image"></i></content></a><!--
+--><a class="header-menu-item"
+      style="cursor: pointer;"
+      onclick="getSubPages(this)"
+      render="profile.link.render"
+      render-name="Link {{ user_data.username }}"
+      render-url="/{{ user_data.username }}/link/"
+      render-sub="#profile-sub"
+      title="Coming Soon"><content><i class="fas fa-globe"></i></content></a>
+    </center>
+</headermenu>

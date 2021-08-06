@@ -1,0 +1,230 @@
+{% extends 'root.html' %}
+{% block content_body %}
+<style>
+    .parallax {
+        background-position: 50% 0;
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        background-size: cover;
+
+        -moz-transform: translate3d(0,0,0);
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+</style>
+<script>
+    $(function() {
+        var $el = $('.parallax');
+        $(window).on('scroll', function () {
+            var scroll = $(document).scrollTop();
+            $el.css({
+                'background-position':'50% '+(-.3*scroll)+'px'
+            });
+        });
+    });
+
+</script>
+<home>
+    <main class="container-fluid sub-con" id="home-main-con">
+        {% include 'content/home_header_public.html' %}
+        <div id="home-sub">
+            <div style="margin-top:30px;">
+                <div class="row no-gutters sleek-dark">
+                    <div class="col-md-6" style="display: grid;place-items:center;">
+                        <div class="container p-5">
+                            <h1 style="text-align:center;">
+                                So what's new?
+                            </h1>
+                            <p style="text-align:center;">
+                                We just different. This platform focused on sharing a text image story for goods! We're not too much special but we will do the best!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="container-fluid p-5 parallax" style="display: grid;place-items:center;height:300px;">
+                            <div>
+                                <h1 style="text-align:center;">
+                                    Place your any link to your profile!
+                                </h1>
+                                <p style="text-align:center;">
+                                    You can place any other link outside the social link we've provided.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:30px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <div class="sleek-dark" style="height:100px;width:99.7%;display: grid;place-items:center;">
+                            <h3 style="text-align:center;">
+                                {{ UserCount }}<br>
+                                User Joined
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sleek-dark" style="height:100px;width:99.7%;display: grid;place-items:center;">
+                            <h3 style="text-align:center;">
+                                {{ PostinganCount }}<br>
+                                Story Shared
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sleek-dark" style="height:100px;width:99.7%;display: grid;place-items:center;">
+                            <h3 style="text-align:center;">
+                                {{ most_common_c }}<br>
+                                Hashtag used
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:30px;">
+                <div class="row no-gutters">
+                    <div class="col-md-12" style="display: grid;place-items:center;">
+                        <div class="">
+                            <h1 style="text-align:center;">
+                                Recent Story
+                            </h1>
+                            <div class="row load-container" style="padding-top:20px;margin:auto;">
+                                {% for user_post in numbers %}
+                                <div class="col-md-4 load-item">
+                                    <postcard class         ="card sleek-dark"
+                                              onclick       ="getPages(this)"
+                                              render        ="story.view.render"
+                                              render-name   ="{{ user_post.post_title }}"
+                                              render-url    ="/p/{{ user_post.mock_url }}/">
+                                        <div class="header">
+                                            <img src="{{ cdn }}/img.cgi@avatar={{ user_post.user.username }}">
+                                            <h5>
+                                                {{ user_post.user.username|title }}
+                                                <br>
+                                                <small>
+                                                    {{ user_post.post_date }}
+                                                </small>
+                                            </h5>
+                                        </div>
+                                        <div class="content">
+                                            <h4 style="text-align:center;">
+                                                <b>{{ user_post.post_title|striptags|title|truncatechars:30 }}</b>
+                                            </h4>
+                                            <content style="opacity:0.6">
+                                                {% autoescape on %}
+                                                {{ user_post.content|striptags|safe|linebreaksbr|truncatechars:300  }}
+                                                {% endautoescape %}
+                                            </content>
+                                        </div>
+                                        <div class="footer">
+                                            <span class="float-left" style="margin-right:10px;">
+                                                <i class="fas fa-eye"></i>
+                                                {{ user_post.post_seen }}
+                                            </span>
+                                            <span class="float-left" style="margin-right:10px;">
+                                                <i class="far fa-comment"></i>
+                                                {{ user_post.commentCount }}
+                                            </span>
+                                        </div>
+                                    </postcard>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:30px;">
+                <div class="row no-gutters">
+                    <div class="col-md-12" style="display: grid;place-items:center;">
+                        <div class="">
+                            <h1 style="text-align:center;">
+                                Popular Story: Alltime
+                            </h1>
+                            <div class="row load-container" style="padding-top:20px;margin:auto;">
+                                {% for user_postpop in PostinganPopAll %}
+                                <div class="col-md-4 load-item">
+                                    <postcard class         ="card sleek-dark"
+                                              onclick       ="getPages(this)"
+                                              render        ="story.view.render"
+                                              render-name   ="{{ user_postpop.post_title }}"
+                                              render-url    ="/p/{{ user_postpop.mock_url }}/">
+                                        <div class="header">
+                                            <img src="{{ cdn }}/img.cgi@avatar={{ user_postpop.user.username }}">
+                                            <h5>
+                                                {{ user_postpop.user.username|title }}
+                                                <br>
+                                                <small>
+                                                    {{ user_postpop.post_date }}
+                                                </small>
+                                            </h5>
+                                        </div>
+                                        <div class="content">
+                                            <h4 style="text-align:center;">
+                                                <b>{{ user_postpop.post_title|striptags|title|truncatechars:30 }}</b>
+                                            </h4>
+                                            <content style="opacity:0.6">
+                                                {% autoescape on %}
+                                                {{ user_postpop.content|striptags|safe|linebreaksbr|truncatechars:300  }}
+                                                {% endautoescape %}
+                                            </content>
+                                        </div>
+                                        <div class="footer">
+                                            <span class="float-left" style="margin-right:10px;">
+                                                <i class="fas fa-eye"></i>
+                                                {{ user_postpop.post_seen }}
+                                            </span>
+                                            <span class="float-left" style="margin-right:10px;">
+                                                <i class="far fa-comment"></i>
+                                                {{ user_postpop.commentCount }}
+                                            </span>
+                                        </div>
+                                    </postcard>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-none d-md-block" style="margin-top:30px;">
+                <div class="row no-gutters sleek-dark">
+                    <div class="col-md-12" style="display: grid;place-items:center;">
+                        <div class="container p-5">
+                            <h1 style="text-align:center;">
+                                Most Recent User
+                            </h1>
+                            <div class="row no-gutters" id="users" style="display:none;">
+                                {% for Ur in UserRecom %}
+                                <div class  ="col-2 tooltp"
+                                     style  ="padding:3px;"
+                                     title  ="{{ Ur.username }}">
+                                    <a onClick      ="getPages(this)"
+                                       render       ="profile.render"
+                                       render-name  ="Profile {{Ur.username}}"
+                                       render-url   ="/{{Ur.username}}/"
+                                       style        ="cursor:pointer;">
+                                        <center>
+                                            <img class  ="imgs"
+                                                 style  ="height:64px;width:64px;border-radius:50%" 
+                                                 src    ="https://cdn.tell.by/img.cgi@avatar={{ Ur.username }}"/>
+                                        </center>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <script src="{{ cdn }}/js/Urecomendation.js"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sleek-orange" style="height:200px;display: grid;place-items:center;margin-top:30px;bottom:-20;">
+                <button class="btn shadow-none btn-lg btn-sleek-orange" onclick="window.open('/auth/daftar/','_SELF')">
+                    Register now.
+                </button>
+            </div>
+        </div>
+    </main>
+</home>
+{% endblock %}

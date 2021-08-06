@@ -1,0 +1,247 @@
+<div class="container-fluid">
+    <div class="alert alert-success" role="alert" style="margin-top:10px;">
+        Edit Mode <a href="/{{ user_data.username }}">Back...</a>
+    </div>
+    <div class="row no-gutters">
+        <div class="col-md" style="margin:5px;">
+            <div id="profile" class="container bg-deep" style="padding:20px;margin-top:20px;border-radius:5px;">
+                <h4>
+                    Edit Profile Information
+                </h4>
+                <br>
+                <style>
+                    .avatar label > input{ /* Menyembunyikan radio button */
+                        visibility: hidden; 
+                        position: absolute; 
+                    }
+                    .avatar label > input + img{ /* style gambar */
+                        cursor:pointer;
+                        border:2px solid transparent;
+                    }
+                    .avatar label > input:checked + img{ /* (RADIO CHECKED) style gambar */
+                        border:4px solid black;
+                        border-radius:50%;
+                    }
+                </style>
+                <form action="." class="avatar" method="POST" enctype="multipart/form-data">
+                    {% if img_success %}
+                    <script>
+                        new jBox('Notice', {
+                            content: 'Avatar Changed!',
+                            color: 'black',
+                        });
+                    </script>
+                    {% endif %}
+                    {% csrf_token %}
+                    <input type="file" name="avatar2">
+                    <br>
+                    <input style="margin-top:15px;" type="submit" value="Save Avatar" class="btn btn-outline-light shadow-none" name="aedit">
+                </form>
+                <hr>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <div class="f-1">
+                        <small>Change Username:</small><br>
+                        <div class="input-group mb-3" id="id_username">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style='width:40px'><i class="fas fa-at"></i></span>
+                            </div>
+                            <input type="text" name="username" placeholder="{{ user_data.username }}" class="form-control shadow-none" value="{{ usr_edit_nm }}">
+                        </div>
+                    </div>
+                    <div class="f-1">
+                        <small>Change Email:</small><br>
+                        <div class="input-group mb-3" id="id_email">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style='width:40px'><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" name="email" placeholder="{{ user_data.email }}" class="form-control shadow-none" value="{% if usr_edit_em %}{{ usr_edit_em }}{% else %}{{ user_data.email }}{% endif %}">
+                        </div>
+                        {% if not active %}
+                        <small>if you want to change once it's verified, you must re-verify again. Please make sure using your real email, it is important in case we sent some email to you like wining email or competition email</small>
+                        {% endif %}
+                    </div>
+                    <br>
+                    {% if not active and not inactive %}
+                    <input type="submit" value="Send Verification" class="btn btn-outline-primary shadow-none" name="everif">
+                    {% elif not active and inactive %}
+                    <input type="submit" value="Re-Send Verification" class="btn btn-outline-primary shadow-none" name="everif">
+                    {% endif %}
+                    {% if active %}
+                    <input type="submit" value="Save Info" class="btn btn-outline-light shadow-none" name="pedit">
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+        {% if active %}
+        <div class="col-md" style="margin:5px;">
+            <div id="social_button" class="container bg-deep" style="padding:20px;margin-top:20px;border-radius:5px;">
+                <h4>
+                    Edit Social Information
+                </h4>
+                <br>
+                <form action="." method="POST" id="social">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style='width:40px'><i class="fas fa-info-circle"></i></span>
+                        </div>
+                        <input type="text" name="bio" placeholder="{% if more_info %}{{ more_info.bio }}{% else %}Profile bio...{% endif %}" value="{{ more_info.bio }}" class="form-control shadow-none">
+                    </div>
+                    {% if usr_more == 0 %}
+                    <small class="text-primary">Isi profile bio terlebih dahulu</small>
+                    <br>
+                    {% endif %}
+                    <br>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style='width:40px'><i class="fab fa-facebook"></i></span>
+                        </div>
+                        <input type="text" name="facebook"  placeholder="{% if more_info %}{{ more_info.facebook }}{% else %}Facebook Link{% endif %}" value="{{ more_info.facebook }}" class="form-control social-form shadow-none">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style='width:40px'><i class="fab fa-twitter"></i></span>
+                        </div>
+                        <input type="text" name="twitter" placeholder="{% if more_info %}{{ more_info.twitter }}{% else %}Twitter Link{% endif %}" value="{{ more_info.twitter }}" class="form-control social-form shadow-none">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" style='width:40px'><i class="fab fa-instagram"></i></span>
+                        </div>
+                        <input type="text" name="instagram" placeholder="{% if more_info %}{{ more_info.instagram }}{% else %}Instagram Link{% endif %}" value="{{ more_info.instagram }}" class="form-control social-form shadow-none">
+                    </div>
+                    {% if usr_more == 0 %}
+                    <script>
+                        $('.social-form').prop('disabled',true);
+                    </script>
+                    {% endif %}
+                    <input type="submit" value="Save Info" class="btn btn-outline-light shadow-none" name="sedit">
+                </form>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% if active %}
+<div class="container-fluid">
+    <div id="linked" class="container bg-deep" style="padding:20px;margin-top:20px;border-radius:5px;">
+        <h4>
+            Link Management
+        </h4>
+        <br>
+        <form action="." method="POST" id="link">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style='width:40px'><i class="fas fa-image"></i></span>
+                </div>
+                <input type="text" name="Linked_img" placeholder="Image Link" value="" class="form-control shadow-none">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style='width:40px'><i class="fas fa-globe"></i></span>
+                </div>
+                <input type="text" name="Linked_url" required placeholder="Link URL" value="" class="form-control shadow-none">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style='width:40px'><i class="fas fa-font"></i></span>
+                </div>
+                <input type="text" name="Linked_val" required placeholder="Title" value="" class="form-control shadow-none">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style='width:40px'><i class="fas fa-sort-amount-down"></i></span>
+                </div>
+                <input type="text" name="Linked_des" required placeholder="Short Description" value="" class="form-control shadow-none">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style='width:40px'><i class="fas fa-sort-amount-down"></i></span>
+                </div>
+                <input type="text" name="Linked_ord" placeholder="Order" value="" class="form-control shadow-none" style="max-width:140px;">
+            </div>
+            <small>Makin besar angka Ordernya itu pertama muncul</small><br><br>
+            <input type="submit" value="Add Link" class="btn btn-outline-light shadow-none" name="ledit">
+        </form>
+        <hr>
+        <h4>
+            Link List
+        </h4>
+        <br>
+        <style>
+            .linkee .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                transition: 0.3s;
+                border: none;
+            }
+            .linkee .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+            }
+            .linkee .card a {
+                color: initial;
+            }
+            .linkee .card a:hover {
+                text-decoration: initial;
+            }
+            .linkee .card .text-muted i {
+                margin: 0 10px;
+            }
+        </style>
+        <div class=" linkee">
+            {% for link_prev in linktree %}
+            <form action="." method="POST">
+                {% csrf_token %}
+                <div class="card" style="margin-bottom:20px;max-height:100px;">
+                    <div class="row no-gutters">
+                        <div class="col-3">
+                            <img style="height:100px; border-radius:5px;" src="{{ link_prev.img }}">
+                        </div>
+                        <div class="col">
+                            <div class="card-body">
+                                <h6 class="card-title"><b>{{ link_prev.title }}</b></h6>
+                                <p class="card-text">{{ link_prev.desc }} 
+                                    <b>
+                                        <button type="submit" name="dellink" value="{{ link_prev.mock }}" class="btn text-danger btn-link">
+                                            Delete
+                                        </button>
+                                    </b>!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+        <br>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert" style="margin-top:10px;">
+        Verify email to activate feature.
+    </div>
+    {% endif %}
+</div>
+<!-- error handler -->
+{% if usr_edit_err == 'usr_nm_err' %}
+<script>
+    $("#id_username").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Username is too short, minimum 7 character.</strong></p>').insertAfter('#id_username');
+</script>
+{% elif usr_edit_err == 'usr_nm_tkn' %}
+<script>
+    $("#id_username").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Username is already taken!</strong></p>').insertAfter('#id_username');
+</script>
+{% elif usr_edit_err == 'usr_em_tkn' %}
+<script>
+    $("#id_email").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Email is already taken!</strong></p>').insertAfter('#id_email');
+</script>
+{% elif usr_edit_err == 'usr_nm_limit' %}
+<script>
+    $("#id_username").addClass("is-invalid");
+    $('<p id="error_1_id_username" class="invalid-feedback"><strong>Woops you can`t use that character!</strong></p>').insertAfter('#id_username');
+</script>
+{% endif %}

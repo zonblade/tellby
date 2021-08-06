@@ -1,0 +1,11 @@
+<home>
+    <main class="container-fluid sub-con" id="home-main-con">
+        {% include 'content/home_header.html' %}
+        <div id="home-sub">
+            {% block content_home %}
+                {% include 'content/home_post_menu.html' %}
+            {% endblock %}
+        </div>
+    </main>
+</home>
+

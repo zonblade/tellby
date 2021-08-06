@@ -1,0 +1,81 @@
+<postingan>
+    <view>
+        <container>
+            <header>
+                <div class="header-menu">
+                    <center>
+                        <a class="header-menu-item"
+      style="cursor: pointer;width:150px!important;"
+      title="Coming Soon"
+                           onclick="createStory(this,'#content-title','#content-keyword','editXthebox');"
+      render="story.create"
+      render-sub="#maincon"
+      render-url="/p/create/"
+      main-url="/p/create/"
+      tinywhat="content-create"
+      ><content><i class="fas fa-book-open"></i>&ensp;Save Story!</content></a><!--
+-->
+                    </center>
+                </div>
+            </header>
+            <contentpost class="container-fluid" style="padding-right:0px!important;padding-left:0px!important;">
+                <div class="row no-gutters">
+                    <div class="col-md ">
+                        <div class="postingan-info bg-deep" style="position:sticky;top:87px;">
+                            <div class="header">
+                                <img src="{{ cdn }}/img.cgi@avatar={{ user.username }}"/>
+                                <h5>
+                                    {{ user.username }}<br>
+                                    <b>Buat Postingan</b>
+                                </h5>
+                            </div>
+                            <div class="container" style="padding-top:10px;border-bottom: 1px solid #343A40; ">
+                                <p>
+                                    <small>
+                                        Create Posts
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="detailpost bg-deep">
+                            <div id="story-content" class="container" style="padding-top:15px;padding-bottom:15px;">
+                                <h3 style="font-weight:800;letter-spacing: 0.1rem;text-align:center;margin-bottom:15px;">
+                                    Create Story
+                                </h3>
+                                <hr>
+                                <input  type="text" id="content-title" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Judul" value="{{ konten.post_title }}"><br>
+                                <input  type="text" id="content-keyword" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Keyword" value="{{ konten.post_keyword }}"><hr>
+                                <h2 id="editorloader" style="text-align:center">
+                                    <span class="spinner-border text-light" role="status"></span>
+                                </h2>
+                                <div  id="editXthebox"  class="editXthebox bg-dark" name="editXthebox" style="display:none;width:100%;min-height:500px;padding:10px;border: 1px solid rgba(255,255,255,0.3)" required>
+                                    <h3>
+                                        Buat Postinganmu disini!
+                                    </h3>
+                                    <p>
+                                        Tulis kontenmu yaaa,
+                                        klik aku untuk ngedit!
+                                        coba block untuk edit tulisannya...<br>
+                                        bissa klik kanan juga loh!!
+                                    </p>
+                                </div>
+                                <script src="https://cdn.tiny.cloud/1/l7ow4wimxht2ghovh6cskicygudoaakvs018qoong1p9uivn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+                                <script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+                                <script src="{{ cdn }}/js.cgi@name=tiny-create.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </contentpost>
+        </container>
+    </view>
+    <!--
+<comment>
+<content>
+komentar
+</content>
+</comment>
+-->
+</postingan>

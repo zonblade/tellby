@@ -1,0 +1,19 @@
+<script>
+    $(document).ready(function() {
+        new jBox('Image', {
+            blockScrollAdjust: ['header']
+        })
+    });
+</script>
+{% for img in IMGG_Result %}
+<div class="card bg-deep"
+     style="margin-bottom:10px;">
+    <a href="https://cdn.tell.by/img.cgi@image={{ img.img_name }}"
+       data-jbox-image="img-explore">
+        <img class=" card-img-top"
+             id="{{ img.img_name }}"
+             src="https://cdn.tell.by/img.cgi@image={{ img.img_name }}"
+             alt="Card image cap">
+    </a>
+</div>
+{% endfor %}

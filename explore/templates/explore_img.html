@@ -1,0 +1,37 @@
+<script>
+    $(document).ready(function() {
+        new jBox('Image', {
+            blockScrollAdjust: ['header']
+        })
+    });
+</script>
+<div class="container" style="margin-top:20px;">
+    <div class="img_loader">
+        <p style="text-align:center">
+            <img src="{{ cdn }}/img/avatar/759.svg">
+        </p>
+    </div>
+    <div class="card-columns" id="explore-img" style="display:none;">
+        {% for img in IMGG_Result %}
+        <div class="card bg-deep"
+             style="margin-bottom:10px;">
+            <a href="https://cdn.tell.by/img.cgi@image={{ img.img_name }}"
+               data-jbox-image="img-explore">
+                <img class=" card-img-top"
+                     id="{{ img.img_name }}"
+                     src="https://cdn.tell.by/img.cgi@image={{ img.img_name }}"
+                     alt="Card image cap">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        $('#explore-img').waitForImages(function(){
+            $('.img_loader').hide();
+            setTimeout(function(){
+                $('.card-columns').show().addClass('animate__animated animate__fadeIn');
+            },500);
+        })
+    </script>
+</div>
+<!-- Modal -->

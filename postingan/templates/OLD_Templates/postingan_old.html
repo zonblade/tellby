@@ -1,0 +1,359 @@
+<style>
+
+    .container_postingan .p .xavsc {
+        display:none;
+    }
+    .container_postingan .p .card-w  .card-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #ddd;
+        border: 1px solid #dddddd;
+    }
+    .container_postingan .p .card-w  .card-footer {
+        background-color: #fff;
+        border-color: #ddd;
+    }
+    .container_postingan .p .card-w .h5 {
+        font-size:14px;
+        //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .container_postingan .p .card-w .time {
+        font-size:12px;
+        //font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .container_postingan .p .post .post-heading {
+        height: 95px;
+        padding: 20px 15px;
+    }
+    .container_postingan .p .post .post-heading .avatar {
+        width: 60px;
+        height: 60px;
+        display: block;
+        margin-right: 15px;
+    }
+    .container_postingan .p .post .post-heading .meta .title {
+        margin-bottom: 0;
+    }
+    .container_postingan .p .post .post-heading .meta .title a {
+        color: black;
+    }
+    .container_postingan .p .post .post-heading .meta .title a:hover {
+        color: #aaaaaa;
+    }
+    .container_postingan .p .post .post-heading .meta .time {
+        margin-top: 8px;
+        color: #999;
+    }
+    .container_postingan .p .post .post-image .image {
+        width: 100%;
+        height: auto;
+    }
+    .container_postingan .p .post .post-description {
+        padding: 15px;
+    }
+    .container_postingan .p .post .post-description p {
+        font-size: 16px;
+    }
+    .container_postingan .p .post .post-description .stats {
+        margin-top: 20px;
+    }
+    .container_postingan .p .post .post-description .stats .stat-item {
+        display: inline-block;
+        margin-right: 15px;
+    }
+    .container_postingan .p .post .post-description .stats .stat-item .icon {
+        margin-right: 8px;
+    }
+    .container_postingan .p .post .post-footer {
+        border-top: 1px solid #ddd;
+        padding: 15px;
+    }
+    .container_postingan .p .post .post-footer .input-group-addon a {
+        color: #454545;
+    }
+    .container_postingan .p .post .post-footer .comments-list {
+        padding: 0;
+        margin-top: 20px;
+        list-style-type: none;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment .avatar {
+        width: 35px;
+        height: 35px;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment .comment-heading {
+        display: block;
+        width: 100%;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment .comment-heading .user {
+        font-size: 14px;
+        font-weight: bold;
+        display: inline;
+        margin-top: 0;
+        margin-right: 10px;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment .comment-heading .time {
+        font-size: 12px;
+        color: #aaa;
+        margin-top: 0;
+        display: inline;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment .comment-body {
+        margin-left: 50px;
+    }
+    .container_postingan .p .post .post-footer .comments-list .comment > .comments-list {
+        margin-left: 50px;
+    }
+    .comment {
+        overflow: hidden;
+        padding: 0 0 1em;
+        border-bottom: 0px solid #ddd;
+        margin: 0 0 1em;
+        *zoom: 1;
+    }
+
+    .comment-img {
+        float: left;
+        margin-right: 33px;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .comment-img img {
+        display: block;
+    }
+
+    .comment-body {
+        overflow: hidden;
+    }
+
+    .comment .text {
+        padding: 10px;
+        border: 1px solid #e5e5e5;
+        border-radius: 5px;
+        background: #fff;
+    }
+
+    .comment .text p:last-child {
+        margin: 0;
+    }
+
+    .comment .attribution {
+        margin: 0.5em 0 0;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Decoration */
+
+    .comments,
+    .comment {
+        position: relative;
+    }
+
+    .comments:before,
+    .comment:before,
+    .comment .text:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 65px;
+    }
+
+    .comments:before {
+        width: 3px;
+        top: -20px;
+        bottom: -20px;
+        background: rgba(0,0,0,0.1);
+    }
+
+    .comment:before {
+        width: 9px;
+        height: 9px;
+        border: 3px solid #fff;
+        border-radius: 100px;
+        margin: 16px 0 0 -6px;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.2), inset 0 1px 1px rgba(0,0,0,0.1);
+        background: #ccc;
+    }
+
+    .comment:hover:before {
+        background: orange;
+    }
+
+    .comment .text:before {
+        top: 18px;
+        left: 78px;
+        width: 9px;
+        height: 9px;
+        border-width: 0 0 1px 1px;
+        border-style: solid;
+        border-color: #e5e5e5;
+        background: #fff;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+    }
+    .o .form-control-underlined {
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-radius: 0;
+        padding-left: 0;
+    }
+    /* width */
+    .theComment::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    /* Track */
+    .theComment::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0);
+    }
+
+    /* Handle */
+    .theComment::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.1);
+    }
+
+    /* Handle on hover */
+    .theComment::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.4);
+    }
+</style>
+<main class="mx-auto container_postingan" style="max-width:750px;margin-top:30px;margin-bottom:40px;">
+    <div class="container-fluid p">
+        <div class="container-fluid mx-auto postingan" style="max-width:1000px;margin-bottom:40px;">
+            <div class="card card-w bg-light post" style="margin:-10px;">
+                <div class="post-heading">
+                    <div class="float-left image">
+                        <img src="https://cdn.tell.by/img.cgi@avatar={{ user_post.username }}"  style="border-radius:50%;" class="img-circle avatar" alt="user profile image">
+                    </div>
+                    <div class="float-left meta">
+                        <div class="title h4">
+                            <a style="cursor:pointer;" onclick="user_post_name(this)" id="{{ user_post.username }}"><b>{{ user_post.username|title }}</b></a>
+                            Story.
+                        </div>
+                        <h6 class="text-muted time">
+                            {{ content_post.post_date }}
+                            <br>
+                            {% if user.is_authenticated %}
+                            <a href="#comment">Comment</a>
+                            {% endif %}
+                            {% if user.id == content_post.user_id %}
+                            { <a href="edit">Edit</a>
+                            | <a href="delete">Delete</a>
+                            }
+                            {% endif %}
+                        </h6><br>
+                    </div>
+                </div>
+                <hr>
+                <div class="post-description" style="word-wrap: break-word;">
+                    {% if user.is_authenticated %}
+                    {% if story_gone %}
+                    <div class="alert alert-warning" role="alert">
+                        The content is hidden to save pages <a href="?p=1">read page one</a>
+                    </div>
+                    {% else %}
+                    {{ content_post.content|safe|linebreaksbr }}
+                    {% endif %}
+                    {% else %}
+                    {{ content_post.content|safe|linebreaksbr }}
+                    <hr>
+                    <p style="text-align:center">
+                        <button class="btn btn-outline-info shadow-none" style="max-width:400px" onClick="window.open('/auth/login/','_SELF')">
+                            Login to see comment
+                        </button>
+                    </p>
+                    {% endif %}
+                </div>
+                {% if user.is_authenticated and active %}
+                <hr>
+                <form id="comment" action="." method="POST" style="padding:10px;">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input type="hidden" id="xavsc" name="helvetica"/>
+                        <input id="#" type="text" name="komen" placeholder="Comment..." class="{% if komen_err %}is-invalid border-danger {% else %} border-dark {% endif %}  bg-light form-control form-control-underlined shadow-none">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary shadow-none" type="submit" id="komentar_kirim"  onClick="this.form.submit(); this.disabled=true;"><i class="fas fa-paper-plane"></i> Comment</button>
+                        </div>
+                    </div>
+                </form>
+                {% endif %}
+                {% if user.is_authenticated and not active %}
+                <hr>
+                <p style="text-align:center">
+                    <button class="btn btn-outline-info shadow-none" style="max-width:400px" disabled>
+                        Verify Email <i>to comment</i>
+                    </button>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="container-fluid" style="position:sticky;top:70px;">
+        <section class="comments">
+            {% if not komentar %}
+            <article class="comment">
+                <a class="comment-img" href="#non">
+                    <img src="https://cdn.tell.by/img.cgi@avatar=notfound" alt="" width="50" height="50">
+                </a>
+                <div class="comment-body">
+                    <div class="text print_post">
+                        <p>This post has no comment</p>
+                    </div>
+                    <p class="attribution">be kind to leave a <a href="#comment">comment</a> ^_^</p>
+                </div>
+            </article>
+            {% else %}
+            <div class="infinite-container">
+                {% for komen_val in komentar %}
+                <div class="infinite-item" >
+                    <article class="comment">
+                        <a class="comment-img" style="cursor:pointer;" onclick="user_post_name(this)" id="{{ komen_val.user.username }}">
+                            <img src="https://cdn.tell.by/img.cgi@avatar={{ komen_val.user.username }}" alt="" width="50" height="50">
+                        </a>
+                        <div class="comment-body">
+                            <div class="text print_post">
+                                <p>{{ komen_val.komen|safe }}</p>
+                            </div>
+                            <p class="attribution">by <a style="cursor:pointer;" onclick="user_post_name(this)" id="{{ komen_val.user.username }}">{{ komen_val.user.username }}</a> at {{ komen_val.komen_date }}</p>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="infinite-script">
+                {% if komentar.has_next %}
+                <a class="infinite-more-link" style="opacity:0;" href="?p={{ komentar.next_page_number }}">More</a>
+                {% endif %}
+            </div>
+            <div class="infinite-loading" style="display:none;margin-top:20px;">
+                <div class="content-centers" style="height:100px;!important;">
+                    <p style="text-align:center">
+                        <img src="{{ cdn }}/img/avatar/39.svg">
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+    </div>
+    {% endif %}
+</main>
+
+<script>
+    /*
+    $('html').waitForImages( function(){
+        $('.img_loader').hide();
+        setTimeout(function(){
+            $('.postingan').show().addClass('animate__animated animate__fadeIn');
+        },500);
+    })
+    */
+</script>

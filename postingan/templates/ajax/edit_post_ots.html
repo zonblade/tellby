@@ -1,0 +1,32 @@
+<br>
+<input  type="text" id="edit-content-title" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Judul" value="{{ konten.post_title }}"><br>
+<input  type="text" id="edit-content-keyword" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Keyword" value="{{ konten.post_keyword }}"><hr>
+<h2 id="editorloader" style="text-align:center">
+    <span class="spinner-border text-light" role="status"></span>
+</h2>
+<div  id="editthebox"  class="editthebox" name="editthebox" style="display:none;width:100%;min-height:300px;" required>
+    {{ konten_sanitize|safe }}
+</div>
+<script src="https://cdn.tiny.cloud/1/l7ow4wimxht2ghovh6cskicygudoaakvs018qoong1p9uivn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/tinymce/4.5.6/jquery.tinymce.min.js"></script>
+<script src="{{ cdn }}/js.cgi@name=tiny-edit.js"></script>
+<hr>
+<div class="container">
+    <button class="btn btn-sm btn-outline-light shadow-none"
+            id="saveedit"
+            onclick="saveStory(this,'#edit-content-title','#edit-content-keyword','editthebox');"
+            render="story.edit.change"
+            render-sub="#story-content"
+            render-url="/p/{{ konten.mock_url }}/edit/"
+            main-url="/p/{{ konten.mock_url }}/"
+            tinywhat="content-edit">
+        Simpan Perubahan
+    </button>
+    <button class="btn btn-sm btn-danger shadow-none"
+            onclick       ="getPages(this);tinymce.remove();new jBox('Notice', { content: 'Dibatalkan', color: 'red', });"
+            render        ="story.view.render"
+            render-name   ="{{ konten.post_title }}"
+            render-url    ="/p/{{ konten.mock_url }}/">
+        Batal
+    </button>
+</div>

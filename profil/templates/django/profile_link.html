@@ -1,0 +1,11 @@
+{% extends 'root.html' %}
+{% block content_body %}
+<div class="container-fluid sub-con">
+    <profile>
+        {% include 'components/profile_header.html' %}
+        <main id="profile-sub">
+            {% include 'profile_link.html' %}
+        </main>
+    </profile>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+<div class="header-image" style="padding:10px;">
+    <div class="container-fluid" style="margin-top:30px;margin-bottom:30px;">
+        <div class="row">
+            <div class="col d-none d-md-inline-block">
+                <p>
+                    Hashtag populer Seluruh Waktu:
+                </p>
+                {% for value, count in popular_hashtag %}
+                <hashtag class="btn shadow-none btn-sleek-orange" style="cursor:pointer;padding:5px;margin:5px;">
+                    <a onclick="getSubPages(this)"
+                       render="hashtag.popular"
+                       render-name="{{ value }}"
+                       render-url="/explore/{{ value }}/hashtag/"
+                       render-sub="#home-sub">#{{ value }}</a>
+                </hashtag>
+                {% endfor %}
+            </div>
+            <div class="col">
+                <p>
+                    Hashtag populer bulan ini
+                </p>
+                {% if month_hashtag %}
+                {% for value, count in month_hashtag %}
+                <hashtag class="btn shadow-none btn-sleek-orange" style="cursor:pointer;padding:5px;margin:5px;">
+                    <a onclick="getSubPages(this)"
+                       render="hashtag.popular"
+                       render-name="{{ value }}"
+                       render-url="/explore/{{ value }}/hashtag/"
+                       render-sub="#home-sub">#{{ value }}</a>
+                </hashtag>
+                {% endfor %}
+                {% else %}
+                <hashtag class="btn shadow-none btn-sleek-dark" style="cursor:pointer;padding:5px;margin:5px;">
+                    <a >#NoHashtagThisMonth</a>
+                </hashtag>
+                {% endif %}
+            </div>
+            <div class="col d-none d-md-inline-block">
+                <p>
+                    Mungkin anda tertarik:
+                </p>
+                <div class="img_loader" style="height:100px;">
+                    <p style="text-align:center">
+                        <span class="spinner-border text-dark" role="status"></span>
+                    </p>
+                </div>
+                <div class="row no-gutters" id="users" style="display:none;">
+                    {% for Ur in UserRecom %}
+                    <div class  ="col-2 tooltp"
+                         style  ="padding:3px;"
+                         title  ="{{ Ur.username }}">
+                        <a onClick      ="getPages(this)"
+                           render       ="profile.render"
+                           render-name  ="Profile {{Ur.username}}"
+                           render-url   ="/{{Ur.username}}/"
+                           style        ="cursor:pointer;">
+                            <center>
+                                <img class  ="imgs"
+                                     style  ="height:32px;width:32px;border-radius:50%" 
+                                     src    ="https://cdn.tell.by/img.cgi@avatar={{ Ur.username }}"/>
+                            </center>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <script src="{{ cdn }}/js/Urecomendation.js"></script>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="home-menu">
+    <center>
+        <a class="home-menu-item"
+           onclick="getSubPages(this)"
+           render="home.menu.more.posts"
+           render-name="Home"
+           render-url="/"
+           render-sub="#home-sub" title="All Story" ><content><i class="fas fa-book-open"></i></content></a><!--
+--><a class="home-menu-item mati" title="Populr Story"      style="cursor: not-allowed;" ><content><i class="fas fa-wave-square"></i></content></a><!--
+--><a class="home-menu-item mati" title="Explore Hashtag"   style="cursor: not-allowed;" title="Coming Soon"><content><i class="fas fa-hashtag"></i></content></a><!--
+--><a class="home-menu-item mati" title="Explore Users"     style="cursor: not-allowed;" title="Coming Soon"><content><i class="fas fa-at"></i></content></a>
+    </center>
+    <script>
+        new jBox('Tooltip', {
+            theme: 'TooltipDark',
+            attach: '.home-menu-item',
+            delayOpen: 50,
+            delayClose: 100
+        });
+    </script>
+</div>

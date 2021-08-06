@@ -1,0 +1,164 @@
+{% extends 'profile.html' %}
+
+{% block content_profile %}
+<div class="col-md-8">
+    {% if img_empty %}
+    <div class="alert alert-warning" role="alert" style="margin-top:15px">
+        {{ user_data.username }} has no image!
+    </div>
+    {% endif %}
+    {% if user_data.username == user.username %}
+    <style>
+        .input-file-img{
+            border-width: 0;
+            border-bottom-width: 1px;
+            border-radius: 0;
+            padding-left: 0;
+        }
+    </style>
+    {% if active %}
+    <div class="alert alert-light" role="alert" style="margin-top:20px;padding:10px;border:none;">
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <input type="file" name="gallery" class="form-control input-file-img shadow-none" style="background-color:rgba(0,0,0,0)" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-dark shadow-none" type="submit" name="gpost" id="button-addon2">Upload</button>
+                </div>
+            </div>
+        </form>
+        <div class="alert alert-success" role="alert">
+            Gallery Limit : {{ img_count }}/100 Images
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+        Verify your Email to activate Upload Images. <a href="/{{ user.username }}/edit/">verify email</a>
+    </div>
+    {% endif %}
+    {% endif %}
+    <style>
+        .gal .card {
+            cursor:pointer;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            border: none;
+            width: 100%;
+        }
+        .gal .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+        }
+        .gal .card a {
+            color: initial;
+        }
+        .gal .card a:hover {
+            text-decoration: initial;
+        }
+        .gal .card .text-muted i {
+            margin: 0 10px;
+        }
+    </style>
+    <div class="img_loader">
+        <p style="text-align:center">
+            <img src="{{ cdn }}/img/avatar/759.svg">
+        </p>
+    </div>
+    <div class="gal_zoom" style="display:none;">
+        <div class="card-columns gal" style="padding:10px;">
+            {% for img in content_post %}
+            <div class="card" style="margin-bottom:10px;">
+                <img class="img_post_fluid card-img-top" id="{{ img.img_name }}" src="https://cdn.tell.by/img.cgi@image={{ img.img_name }}" alt="Card image cap">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        $('.gal_zoom').waitForImages(function(){
+            $('.img_loader').hide();
+            setTimeout(function(){
+                $('.gal_zoom').show().addClass('animate__animated animate__fadeIn');
+            },500);
+        })
+    </script>
+    <div class="fixed-bottom mx-auto" style="max-width:1300px;">
+        <div style="position:absolute;right:10px;bottom:20px;">
+            {% if content_post.has_previous %}
+            <a href="?p={{ content_post.previous_page_number }}" class="btn btn-light shadow-none" style="border:1px solid black">
+                <i class="fas fa-chevron-left"></i> Prev
+            </a>
+            {% endif %}
+            <a href="#" class="btn btn-light shadow-none" style="border:1px solid black">
+                Page {{ content_post.number }}
+            </a>
+            {% if content_post.has_next %}
+            <a href="?p={{ content_post.next_page_number }}" class="btn btn-light shadow-none" style="border:1px solid black">
+                Next <i class="fas fa-chevron-right"></i>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<style>
+    .modal-content, .modal-body {
+        background-color:rgba(0,0,0,0.5);
+        border: 0;
+        outline: 0;
+        border-width: 0;
+    }
+</style>
+<div class="modal fade" id="img_prev_modal" tabindex="-1" role="dialog">
+    <form action="." method="POST">
+        {% if user_data.username == user.username %}
+        {% csrf_token %}
+        {% endif %}
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title">Image Preview</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <img src="..." value="..." id="img_prev_modal_show" class="img-fluid"/>
+                    </center>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-outline-info shadow-none" id="courl">
+                        Copy Image URL
+                    </button>
+                    {% if user_data.username == user.username %}
+                    <input name="img_name" type="hidden" id="img_prev_modal_inp">
+                    <input name="gdpost" type="hidden" value="confirmed">
+                    &ensp; &ensp;&ensp; 
+                    <button type="submit" class="btn btn-outline-danger shadow-none">
+                        Delete Image
+                    </button>
+                    {% endif %}
+                </div>
+                <script>
+                    $("#courl").on('click', function(){
+                        var SC = $('#img_prev_modal_show').attr("src");
+                        navigator.clipboard.writeText(SC);
+                        $("#courl").html('Copy URL Done...');
+                        setTimeout(function(){
+                            $("#courl").html('Copy Image URL');
+                        },1000);
+                    })
+                </script>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(".img_post_fluid").on("click", function(){
+        var SRC = $(this).attr("src");
+        var VAL = $(this).attr("id");
+        $('#img_prev_modal').modal("show");
+        $("#img_prev_modal_show").attr("src",SRC);
+        $("#img_prev_modal_inp").val(VAL);
+    })
+</script>
+{% endblock %}

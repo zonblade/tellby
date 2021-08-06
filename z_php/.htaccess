@@ -1,0 +1,9 @@
+DirectoryIndex engine.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteRule ^image.cgi@story_img=([a-z0-9\-.]+)?$ /engine.php?story_img=$1
+    RewriteRule ^image.cgi@avatar=([a-z0-9\-.]+)?$ /engine.php?avatar=$1
+    RewriteRule ^image.cgi@web_icon=([a-z0-9\-.]+)?$ /engine.php?web_icon=$1
+</IfModule>

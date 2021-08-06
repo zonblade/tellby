@@ -1,0 +1,298 @@
+<script>
+    $(document).ready(function() {
+        new jBox('Image', {
+            blockScrollAdjust: ['header']
+        })
+    });
+</script>
+<main class="mx-auto" style="max-width:1300px;margin-top:10px;">
+    <div class="container-fluid">
+        <style>
+            @media (min-width: 0) {
+                .g-mr-15 {
+                    margin-right: 1.07143rem !important;
+                }
+            }
+            @media (min-width: 0){
+                .g-mt-3 {
+                    margin-top: 0.21429rem !important;
+                }
+            }
+
+            .g-height-50 {
+                height: 50px;
+            }
+
+            .g-width-50 {
+                width: 50px !important;
+            }
+
+            @media (min-width: 0){
+                .g-pa-30 {
+                    padding: 2.14286rem !important;
+                }
+            }
+
+            .g-bg-secondary {
+                background-color: #fafafa !important;
+            }
+
+            .u-shadow-v18 {
+                box-shadow: 0 5px 10px -6px rgba(0, 0, 0, 0.15);
+            }
+
+            .g-color-gray-dark-v4 {
+                color: #777 !important;
+            }
+
+            .g-font-size-12 {
+                font-size: 0.85714rem !important;
+            }
+
+            .media-comment {
+                margin-top:20px
+            }
+            /*Profile Card 1*/
+            .profile-card-1 {
+                font-family: "Open Sans", Arial, sans-serif;
+                position: relative;
+                float: left;
+                overflow: hidden;
+                width: 100%;
+                color: #ffffff;
+                text-align: center;
+                height: 350px;
+                border: none;
+            }
+            .profile-card-1 .background {
+                width: 100%;
+                vertical-align: top;
+                opacity: 0.9;
+                -webkit-filter: blur(5px);
+                filter: blur(5px);
+                -webkit-transform: scale(1.8);
+                transform: scale(2.8);
+            }
+            .profile-card-1 .card-content {
+                width: 100%;
+                padding: 15px 25px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+            }
+            .profile-card-1 .profile {
+                border-radius: 50%;
+                position: absolute;
+                bottom: 50%;
+                left: 50%;
+                max-width: 100px;
+                opacity: 1;
+                box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+                border: 2px solid rgba(255, 255, 255, 1);
+                -webkit-transform: translate(-50%, 0%);
+                transform: translate(-50%, 0%);
+            }
+            .profile-card-1 h2 {
+                margin: 0 0 5px;
+                font-weight: 600;
+                font-size: 25px;
+            }
+            .profile-card-1 h2 small {
+                display: block;
+                font-size: 15px;
+                margin-top: 10px;
+            }
+            .profile-card-1 i {
+                display: inline-block;
+                font-size: 16px;
+                color: #ffffff;
+                text-align: center;
+                border: 1px solid #fff;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                border-radius: 50%;
+                margin: 0 5px;
+            }
+            .profile-card-1 .icon-block {
+                float: left;
+                width: 100%;
+                margin-top: 15px;
+            }
+            .profile-card-1 .icon-block a {
+                text-decoration: none;
+            }
+            .profile-card-1 i:hover {
+                background-color: #fff;
+                color: #2e3434;
+                text-decoration: none;
+            }
+            .form-control-underlined {
+                border-width: 0;
+                border-bottom-width: 1px;
+                border-radius: 0;
+                padding-left: 0;
+            }
+        </style>
+        <div class="row no-gutter" style="margin-bottom:60px;">
+            <div class="col-md-4">
+                <!-- SIDE -->
+                <style>
+                </style>
+                <div class="pcard" style="position:sticky;top:70px;">
+                    <div style="height:10px;">
+                    </div>
+                    <div class="card profile-card-1">
+                        <img src="https://cdn.tell.by/img.cgi@avatar=sample" alt="profile-sample1" class="background bg-light"/>
+                        <a href="https://cdn.tell.by/img.cgi@avatar={{ user_data.username }}" data-jbox-image="profileimg">
+                            <img src="https://cdn.tell.by/img.cgi@avatar={{ user_data.username }}" style="height:100px;width:100px;" alt="profile-image" class="profile"/>
+                        </a>
+                        <div class="card-content">
+                            <h2 style="cursor:pointer;word-break:break-word;word-wrap:break-word;word-break: break-all;" id="profile_main">@{{ user_data.username }}<br><small>{{ more_info.bio|truncatechars:100 }}</small></h2>
+
+                            <div class="icon-block"><a href="{{ more_info.facebook }}"><i class="fa fa-facebook"></i></a><a href="{{ more_info.twitter }}"> <i class="fa fa-twitter"></i></a><a href="{{ more_info.instagram }}"> <i class="fa fa-instagram"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" style="padding:15px;">
+                            <div class="row no-gutters" style="margin-top:10px;">
+                                <div class="col">
+                                    <a id="profile_links" class="btn btn-light btn-block shadow-none" style="cursor:pointer;border:2px solid black">
+                                        <i class="fas fa-globe"></i> Links
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a id="profile_gallery" class="btn btn-light btn-block shadow-none" style="cursor:pointer;border:2px solid black">
+                                        <i class="far fa-image"></i> Gallery
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3" style="margin-top:15px;">
+                                <input id="inp_search" type="text" placeholder="Story Search..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search"><i class="fas fa-search"></i></button>
+                                </div>
+                                <script>
+                                    $('#btn_search').on('click',function(){
+                                        var Search = $('#inp_search').val();
+                                        if( !($('#inp_search').val()) ){
+                                            $('#inp_search').addClass("is-invalid");
+                                        }else{
+                                            window.open('/{{ user_data.username }}/search/'+Search,'_SELF');
+                                        }
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End -->
+            </div>
+            <style>
+                .posts {
+                    margin:auto;
+                    max-width:600px;
+                }
+            </style>
+            {% block content_profile %}
+            <div class="col-md-8">
+                {% if post_empty %}
+                <div class="alert alert-warning" role="alert" style="margin-top:10px;">
+                    {% if user.username == user_data.username %}
+                    you dont have any story <a href="/p/create/">please tell your story..</a>
+                    {% else %}
+                    this user has no story to tell...
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class="infinite-container">
+                    {% for user_post in postingan_obj %}
+                    <div class="posts infinite-item">
+                        <div class="media g-mb-30 media-comment">
+                            <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                                <div class="g-mb-15">
+                                    <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ user_data.username }}</h5>
+                                    <span class="g-color-gray-dark-v4 g-font-size-12">{{ user_post.post_date }}</span>
+                                </div>
+                                <br>
+                                <div  class="print_post">
+                                    {{ user_post.content|safe|linebreaksbr|truncatechars:600  }}
+                                </div>
+                                <hr>
+                                <ul class="list-inline d-sm-flex my-0">
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}">
+                                            <i class="fas fa-eye g-pos-rel g-top-1 g-mr-3"></i>
+                                            {{ user_post.post_seen }}
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/#comment">
+                                            <i class="far fa-comment g-pos-rel g-top-1 g-mr-3"></i>
+                                            {{ user_post.commentCount }}
+                                        </a>
+                                    </li>
+                                    {% if user_post.user_id == user.id %}
+                                    |&ensp;
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/edit">
+                                            <i class="fas fa-pen g-pos-rel g-top-1 g-mr-3"></i>
+                                            Edit
+                                        </a>
+                                    </li>
+                                    <li class="list-inline-item g-mr-20">
+                                        <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/p/{{ user_post.mock_url }}/delete">
+                                            <i class="fas fa-trash g-pos-rel g-top-1 g-mr-3"></i>
+                                            Delete
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    <li class="list-inline-item ml-auto">
+                                        <a class="u-link-v5 btn btn-sm btn-outline-dark shadow-none user_post_story"  onclick="getPages(this)"
+                                           render        ="story.view.render"
+                                           render-name   ="Story"
+                                           render-url    ="/p/{{ user_post.mock_url }}/">
+                                            <i class="fas fa-eye g-pos-rel g-top-1 g-mr-3"></i>
+                                            Read Story
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="infinite-loading" style="display:none;margin-top:20px;">
+                    <div class="content-centers" style="height:100px;!important;">
+                        <p style="text-align:center">
+                            <img src="{{ cdn }}/img/avatar/39.svg">
+                        </p>
+                    </div>
+                </div>
+                <div id="infinite-script" style="display:none;">
+                    {% if postingan_obj.has_next %}
+                    <a class="infinite-more-link" href="?p={{ postingan_obj.next_page_number }}">More</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="fixed-bottom mx-auto" style="max-width:1100px;">
+                <div style="position:absolute;right:10px;bottom:20px;">
+                    {% if user.username == user_data.username %}
+                    <span class="d-md-none">
+                        <a onclick="create_story(this)"  class="btn btn-light shadow-none" style="border:2px solid black">
+                            <i class="fas fa-plus"></i> Create Story
+                        </a>
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</main>
+<script>
+    var UserName = '{{ user_data.username}}';
+    var CSRFTOKEN = '{{ csrf_token }}';
+</script>

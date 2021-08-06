@@ -1,0 +1,46 @@
+
+<tellby_modal class="animate__animated animate__fadeIn">
+    <modal class="bg-deep animate__animated animate__fadeIn animate__delay-1s">
+        <button onclick="$('tellby_modal').remove();"class="btn btn-sleek-danger shadow-none float-right sticky-top">
+            <i class="fas fa-times"></i>
+        </button>
+        <h2 class="text-light">{{ user.username }} // Edit</h2>
+        <div class="form-group">
+            <label for="change-username" style="margin-top:10px;">Ganti Username:</label>
+            <input type="text" class="form-control shadow-none" id="change-username" value="{{ user.username }}"/>
+            <button class="btn btn-sleek-primary shadow-none">
+                Ganti
+            </button>
+        </div>
+
+        <div id="emailContainer">
+            {% include 'components/confirmEmail.html' %}
+        </div>
+        <div class="form-group">
+            <label for="change-bio" style="margin-top:10px;">Ganti Bio:</label>
+            <input type="text" class="form-control shadow-none" id="change-bio" value="{{ user_data_more.bio }}"/>
+            <button class="btn btn-sleek-primary shadow-none">
+                Simpan
+            </button>
+        </div>
+        {% if user_data_more.bio %}
+        <hr>
+        <h4 class="text-light">Social Button</h4>
+        <div class="form-group">
+            <label for="social-facebook" style="margin-top:10px;">Facebook:</label>
+            <input type="text" class="form-control shadow-none" id="social-facebook" placeholder=""/>
+            <label for="social-instagram" style="margin-top:5px;">Instagram:</label>
+            <input type="text" class="form-control shadow-none" id="social-instagram" placeholder=""/>
+            <label for="social-twitter" style="margin-top:5px;">Twitter:</label>
+            <input type="text" class="form-control shadow-none" id="social-twitter" placeholder=""/>
+            <label for="social-github" style="margin-top:5px;">Github:</label>
+            <input type="text" class="form-control shadow-none" id="social-github" placeholder=""/>
+            <label for="social-dribbble" style="margin-top:5px;">Dribbble:</label>
+            <input type="text" class="form-control shadow-none" id="social-dribbble" placeholder=""/>
+            <button class="btn btn-sleek-primary shadow-none">
+                Simpan
+            </button>
+        </div>
+        {% endif %}
+    </modal>
+</tellby_modal>

@@ -1,0 +1,7 @@
+{% if user_story %}
+{% include 'components/profile_post.html' %}
+{% else %}
+<div style="display:grid;place-items:center;height:60vh;width:100%">
+    <img style="height:160px!important;width:160px!important;opacity:0.4" src="{{ cdn }}/img/icon/note.svg">
+</div>
+{% endif %}

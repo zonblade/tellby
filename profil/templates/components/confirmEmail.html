@@ -1,0 +1,10 @@
+<label for="emailConfirm">Ganti email: </label>
+<input class="form-control shadow-none" id="emailConfirm" name="emailConfirm" placeholder="{{ user.email }}" value="{{ user.email }}" />
+<button onclick="confirmEmail(this)" render-url="/{{ user.username }}/" render="email.send.request" class="btn btn-sm btn-sleek-orange shadow-none">
+    {% if not active %}
+    Resend Verify
+    {% else %}
+    Change Email
+    {% endif %}
+</button>
+<br>

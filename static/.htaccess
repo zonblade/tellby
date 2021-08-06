@@ -1,0 +1,13 @@
+php_value post_max_size 30M
+php_value upload_max_filesize 30M
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    ErrorDocument 403 /cdn.html
+    ErrorDocument 404 /cdn.html
+
+    RewriteRule ^js.cgi@name=([a-z0-9\-.]+)?$ /get.php?js=$1
+    RewriteRule ^css.cgi@name=([a-z0-9\-.]+)?$ /get.php?css=$1
+    RewriteRule ^data.cgi@key=([a-z0-9\-.]+)?$ /get.php?serverkey=$1
+    RewriteRule ^img.cgi@avatar=([A-Za-z0-9\-._]+)?$ /get.php?avatar=$1
+    RewriteRule ^img.cgi@image=([A-Za-z0-9\-._]+)?$ /get.php?img=$1
+</IfModule>

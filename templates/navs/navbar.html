@@ -1,0 +1,70 @@
+<script>
+    var CSRFTOKENNAV = '{{ csrf_token }}';
+    document.onreadystatechange = function () {
+        if (document.readyState === "complete") {
+            console.log(document.readyState);
+            document.getElementById("PreLoaderBar").style.display = "none";
+        }
+    }
+</script>
+{% if user.is_authenticated %}
+<script>
+    var UserNameGEN = '{{ user.username }}';
+</script>
+{% endif %}
+<a class="navbar-brand" {% if not user.is_authenticated%} onclick="window.open('/','_SELF')" style="cursor:pointer;" {% endif %}>
+    <img src="https://cdn.tell.by/img/eucalyptus.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    <span class="d-none d-md-inline-block">TellBy</span>
+</a>
+{% if user.is_authenticated %}
+<div class=" ml-auto d-none d-md-block">
+    Hallo, {{ user.username }}!
+</div>
+<div class="ml-auto"><!--
+--><a class="navigation-btn" onclick="getPages(this)"
+      render        ="home.render"
+      render-name   ="Home"
+      render-url    ="/">
+    <content>
+        <h5 class="fas fa-home">
+        </h5>
+    </content>
+    </a><!--
+-->{% if active %}<a class="navigation-btn" onclick="getPages(this)"
+      render        ="story.page.create"
+      render-name   ="Create Story"
+      render-url    ="/p/create/">
+    <content>
+        <h5 class="fas fa-pen">
+        </h5>
+    </content>
+    </a>{% endif %}<!--
+--><a class="navigation-btn" onclick="getPages(this)"
+      render        ="profile.render"
+      render-name   ="Profile {{ user.username }}"
+      render-url    ="/{{ user.username }}/">
+    <content>
+        <h5 class="fas fa-user">
+        </h5>
+    </content>
+    </a><!--
+--><!--
+--><a class="navigation-btn" id="more-menu">
+    <content>
+        <h5 class="fas fa-ellipsis-h">
+        </h5>
+    </content>
+    </a><!--
+-->
+</div>
+{% else %}
+<div class="ml-auto">
+    <div class="d-inline-block">
+        <a class="navigation-btn" href="{% url 'login' %}" style="width:150px;display: grid;place-items:center;">Log-in</a>
+    </div><!--
+--><div class="d-inline-block"><a class="navigation-btn" href="/auth/daftar/" style="width:150px;display: grid;place-items:center;">Register</a></div>
+</div>
+{% endif %}
+<div class="progress" id="PreLoaderBar">
+    <div class="indeterminate"></div>
+</div>

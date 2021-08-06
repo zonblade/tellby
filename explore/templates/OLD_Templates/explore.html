@@ -1,0 +1,87 @@
+{% extends 'root.html' %}
+
+{% block content_body %}
+<main class="mx-auto" style="max-width:1300px;margin-top:30px;">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-md-6" style="padding:20px;">
+                <div style="margin-top:20px">
+                    <div class="row">
+                        <!-- DEMO 5 Item-->
+                        <div class="col-lg">
+                            <div class="hover hover-5 text-white rounded"><img src="{{ cdn }}/img/nature.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="hover-5-content">
+                                    <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore Users<br><span></span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;position:sticky;top:70px;">
+                    <div style="margin-top:20px">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width:48px"><center>@</center></span>
+                            </div>
+                            <input id="inp_search_usr" type="text" placeholder="User Search..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search_usr"><i class="fas fa-search"></i></button>
+                            </div>
+                            <script>
+                                $('#btn_search_usr').on('click',function(){
+                                    var Search = $('#inp_search_usr').val();
+                                    if( !($('#inp_search_usr').val()) ){
+                                        $('#inp_search_usr').addClass("is-invalid");
+                                    }else{
+                                        window.open('/explore/'+Search+'/user/','_SELF');
+                                    }
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6" style="padding:20px;">
+                <div style="margin-top:20px">
+                    <div class="row">
+                        <!-- DEMO 5 Item-->
+                        <div class="col-lg">
+                            <div class="hover hover-5 text-white rounded">
+                                <img src="{{ cdn }}/img/nature_3.jpg" alt="">
+                                <div class="hover-overlay"></div>
+                                <div class="hover-5-content">
+                                    <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore Hashtag<br><span></span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;position:sticky;top:70px;">
+                    <div style="margin-top:20px">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1" style="width:48px"><center>#</center></span>
+                            </div>
+                            <input id="inp_search_hsh" type="text" placeholder="hashtag ..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search_hsh"><i class="fas fa-search"></i></button>
+                            </div>
+                            <script>
+                                $('#btn_search_hsh').on('click',function(){
+                                    var Search = $('#inp_search_hsh').val();
+                                    if( !($('#inp_search_hsh').val()) ){
+                                        $('#inp_search_hsh').addClass("is-invalid");
+                                    }else{
+                                        window.open('/explore/'+Search+'/hashtag/','_SELF');
+                                    }
+                                })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

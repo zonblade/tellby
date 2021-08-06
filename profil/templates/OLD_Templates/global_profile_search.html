@@ -1,0 +1,113 @@
+{% extends 'root.html' %}
+
+{% block content_body %}
+<style>
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        border: none;
+    }
+    .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+    }
+    .card a {
+        color: initial;
+    }
+    .card a:hover {
+        text-decoration: initial;
+    }
+    .card .text-muted i {
+        margin: 0 10px;
+    }
+
+</style>
+<main class="mx-auto" style="max-width:1300px;margin-top:30px;">
+    <div class="container-fluid">
+        <div class="row no-gutters">
+            <div class="col-md-4" style="padding:15px;">
+                <div style="position:sticky;top:100px;">
+                    <div style="margin-top:20px">
+                        <div class="row">
+                            <!-- DEMO 5 Item-->
+                            <div class="col-lg">
+                                <div class="hover hover-5 text-white rounded"><img src="{{ cdn }}/img/nature.jpg" alt="">
+                                    <div class="hover-overlay"></div>
+                                    <div class="hover-5-content">
+                                        <h3 class="hover-5-title text-uppercase font-weight-light mb-0">Explore Users<br><span></span></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light" style="margin-top:20px;padding:10px;border-radius:5px;position:sticky;top:70px;">
+                        <div style="margin-top:20px">
+                            <div class="input-group mb-3">
+                                <input id="inp_search_usr" type="text" placeholder="User Search..." class="bg-light form-control form-control-underlined border-primary shadow-none">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary shadow-none" type="button" id="btn_search_usr"><i class="fas fa-search"></i></button>
+                                </div>
+                                <script>
+                                    $('#btn_search_usr').on('click',function(){
+                                        var Search = $('#inp_search_usr').val();
+                                        if( !($('#inp_search_usr').val()) ){
+                                            $('#inp_search_usr').addClass("is-invalid");
+                                        }else{
+                                            window.open('/explore/'+Search+'/user/','_SELF');
+                                        }
+                                    })
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md" style="padding:15px;">
+                {% if err == True %}
+                <div class="alert alert-danger" role="alert"style="margin-top:20px">
+                    {{ query }} No User Match!
+                </div>
+                {% elif err == False %}
+                <div class="alert alert-success" role="alert"style="margin-top:20px">
+                    {{ query }} User Match!
+                </div>
+                {% endif %}
+                <div class="row no-gutters">
+                    {% for user_list in user_data %}
+                    <div class="col-sm-4" style="padding:10px;">
+                        <div class="card" style="margin-top:150px;margin-bottom:20px;">
+                            <a href="/{{ user_list.username }}">
+                                <center>
+                                    <img class="card-img-top" style="width:100px;height:100px;border-radius:50%;margin-top:-100px;" src="https://cdn.tell.by/img.cgi@avatar={{ user_list.username }}">
+                                </center>
+                                <div class="card-body">
+                                    <h4 class="card-title"><b>@{{ user_list.username }} {{ User_Avatar.user_id }}</b></h4>
+                                    <p class="card-text"><small class="text-muted"><i class="fas fa-calendar-alt"></i>{{ user_list.date_joined|date:"d - m - Y" }}</small></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="fixed-bottom mx-auto" style="max-width:1300px;">
+            <div style="position:absolute;right:10px;bottom:20px;">
+                {% if content_post.has_previous %}
+                <a href="?p={{ content_post.previous_page_number }}" class="btn btn-light shadow-none" style="border:1px solid black">
+                    <i class="fas fa-chevron-left"></i> Prev
+                </a>
+                {% endif %}
+                <a href="#" class="btn btn-light shadow-none" style="border:1px solid black">
+                    Page {{ content_post.number }}
+                </a>
+                {% if content_post.has_next %}
+                <a href="?p={{ content_post.next_page_number }}" class="btn btn-light shadow-none" style="border:1px solid black">
+                    Next <i class="fas fa-chevron-right"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

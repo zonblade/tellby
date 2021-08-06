@@ -1,0 +1,77 @@
+<panel>
+    <content>
+        <div class="container-fluid sticky-top bg-deep" style="padding-top:10px;">
+            <div class          ="row no-gutters">
+                <div class="col-4">
+                    <img onclick        ="getPages(this)"
+                         render         ="profile.render"
+                         render-name    ="Profile"
+                         render-url     ="/{{ user.username }}/"
+                         style          ="cursor:pointer;height:75px;width:75px;padding:5px;"
+                         src="{{ cdn }}/img.cgi@avatar={{ user.username }}">
+                </div>
+                <div class="col">
+                    <p>
+                        <b onclick        ="getPages(this)"
+                           render         ="profile.render"
+                           render-name    ="Profile"
+                           render-url     ="/{{ user.username }}/"
+                           style          ="cursor:pointer;">{{ user.username }}</b>
+                        <br>
+                    </p>
+                    <a type         ="submit"
+                       onclick      ="getModal(this);"
+                       render       ="profile.edit.modal"
+                       render-sub   ="#edit-modal"
+                       render-url   ="/{{ user.username }}/"
+                       class="btn btn-sm btn-sleek-primary shadow-none"
+                       style        ="width:40%;">Edit</a>
+                    <a href="/auth/logout/"
+                       class="btn btn-sm btn-sleek-danger shadow-none"
+                       style="width:40%;">Logout</a>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="container-fluid">
+            <h3>
+                Profile Tools
+            </h3>
+            <button onClick="comingSoon()" style="height:48px;width:100%;" class="btn btn-sm btn-sleek-dark shadow-none">
+                <i class="fas fa-globe"></i> Manage Links
+            </button>
+            <br>
+            <br>
+            <h3>
+                Fun Feature!
+            </h3>
+            <button onClick="comingSoon()" style="height:48px;width:100%;" class="btn btn-sm btn-sleek-dark shadow-none">
+                <i class="fas fa-music"></i> Play Music
+            </button>
+            <br>
+            <button onClick="comingSoon()" style="height:48px;width:100%;" class="btn btn-sm btn-sleek-dark shadow-none">
+                <i class="fas fa-headphones"></i> Live DisCUS
+            </button>
+        </div>
+    </content>
+</panel>
+<quickstory>
+</quickstory>
+<script>
+    function SEOToggle(){
+        $('#seoQuick').toggle("slide", {direction:'down'});
+    }
+    $('#more-menu').on('click',function(){
+        $('rightcon panel').toggle("slide", {direction:'right'});
+        $('#more-menu').toggleClass('aktif');
+    })
+    $('.quickstory').on('click',function(){
+        // Reload the div
+        $("#quickstoryscript").load(" #quickstoryscript")
+        $('quickstory').toggle("slide", {direction:'down'});
+        $('.quickstory').toggleClass('aktif');
+    })
+</script>
+<write>
+
+</write>

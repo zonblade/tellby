@@ -1,0 +1,31 @@
+<div id="quickstorycontainer">
+    {% if not active %}
+    <div class="alert alert-danger sleek-danger" role="alert">
+        <span class="text-light">Please Confirm Your Email!</span>
+    </div>
+    {% endif %}
+    <div  id="quickstorytext" name="quickstorytext" class="mceEditorQuick" required></div>
+    <hr>
+    <div id="seoQuick" style="display:none;">
+        <input  type="text" id="content-title" name="content-title" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Judul" ><br>
+        <input  type="text" id="content-keyword" name="content-keyword" style="color:white!important" class="seo-form shadow-none form-control" placeholder="Keyword" ><hr>
+    </div>
+    <script src="https://cdn.tiny.cloud/1/l7ow4wimxht2ghovh6cskicygudoaakvs018qoong1p9uivn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="{{ cdn }}/js.cgi@name=tinyquick.js"></script>
+    <button type="submit"
+            value="post story"
+            onclick="createStory(this,'#content-title','#content-keyword','quickstorytext');"
+            render="story.create"
+            render-sub="#maincon"
+            render-url="/p/create/"
+            main-url="/p/create/"
+            tinywhat="content-create"
+            class="btn btn-sleek-orange shadow-none">
+        Kirim
+    </button>
+    <button type="button"
+            class="btn btn-sleek-primary  shadow-none"
+            onClick="SEOToggle()">
+        SEO option
+    </button>
+</div>

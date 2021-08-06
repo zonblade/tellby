@@ -1,0 +1,11 @@
+{% extends 'root.html' %}
+{% block content_body %}
+<home>
+    <main class="container-fluid sub-con" id="home-main-con">
+        {% include 'content/home_header.html' %}
+        <div id="home-sub">
+        {% include 'explore_hashtag.html' %}
+        </div>
+    </main>
+</home>
+{% endblock %}
